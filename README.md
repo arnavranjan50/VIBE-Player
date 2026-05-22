@@ -6,10 +6,6 @@
 
 <br/>
 
-<img src="https://img.shields.io/github/stars/arnavranjan50/aurasync-ai?style=for-the-badge&color=purple" />
-<img src="https://img.shields.io/github/forks/arnavranjan50/aurasync-ai?style=for-the-badge&color=blue" />
-<img src="https://img.shields.io/github/license/arnavranjan50/aurasync-ai?style=for-the-badge&color=green" />
-<img src="https://img.shields.io/github/issues/arnavranjan50/aurasync-ai?style=for-the-badge&color=red" />
 
 </div>
 
