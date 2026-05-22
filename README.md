@@ -1,4 +1,4 @@
-# 🎵 AuraSync AI — Smart Music Player with AI Assistant & Mood Detection
+# 🎵 VIBE AI — Smart Music Player with AI Assistant & Mood Detection
 
 <div align="center">
 
@@ -17,7 +17,7 @@
 
 ## 🌌 About The Project
 
-**AuraSync AI** is an intelligent music player that combines:
+**VIBE AI** is an intelligent music player that combines:
 
 - 🎧 Smart Music Streaming
 - 🤖 AI Voice Assistant
@@ -37,7 +37,6 @@ The system analyzes facial expressions, voice tone, and listening behavior to un
 <td width="50%">
 
 ### 🤖 AI Assistant
-- Voice-controlled commands
 - Smart playlist generation
 - Song recommendations
 - AI chat integration
@@ -48,8 +47,6 @@ The system analyzes facial expressions, voice tone, and listening behavior to un
 <td width="50%">
 
 ### 😊 Mood Detection
-- Real-time facial emotion analysis
-- Voice emotion recognition
 - Mood-based playlists
 - Stress detection
 - Adaptive recommendations
