@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/jio-api",
+      "destination": "https://www.jiosaavn.com/api.php"
+    }
+  ]
+}
