@@ -122,10 +122,10 @@ flowchart TD
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/aurasync-ai.git
+git clone https://github.com/yourusername/VIBE-Player.git
 
 # Navigate to project folder
-cd aurasync-ai
+cd VIBE-player
 
 # Install dependencies
 npm install
