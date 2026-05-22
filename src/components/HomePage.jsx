@@ -289,23 +289,6 @@ const HomePage = ({ currentTrack, onPlayTrack, onNavigateSearch }) => {
         <div className="home-ambient-fallback" />
       </div>
 
-      {/* ── Hero banner (desktop Spotify-style) ── */}
-      <section className="sp-promo-banner" aria-label="Featured">
-        <div className="sp-promo-banner__art">
-          <div className="sp-promo-noise" />
-          <div className="sp-promo-flower sp-promo-flower--a" />
-          <div className="sp-promo-flower sp-promo-flower--b" />
-        </div>
-        <div className="sp-promo-banner__copy">
-          <p className="sp-promo-eyebrow">Announcement</p>
-          <h2 className="sp-promo-headline">Listen on Spotify</h2>
-          <p className="sp-promo-subline">Your library, playlists, and podcasts — in one place.</p>
-          <button type="button" className="sp-promo-cta">
-            Listen now
-          </button>
-        </div>
-      </section>
-
       {/* ── Filter Chips ── */}
       <div className="sp-filter-row">
         {['all', 'music', 'podcasts'].map((f) => (
