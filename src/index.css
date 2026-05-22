@@ -156,8 +156,14 @@ input,textarea{font-family:inherit}
 .section-link:hover{color:var(--accent)}
 
 /* ─── Horizontal Scroll ─── */
+.h-scroll-wrap{position:relative}
 .h-scroll{display:flex;gap:14px;overflow-x:auto;padding:0 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .h-scroll::-webkit-scrollbar{display:none}
+
+/* ─── Scroll Indicator ─── */
+.scroll-indicator{padding:12px 20px 0;display:flex;justify-content:center}
+.scroll-indicator__track{width:100%;max-width:200px;height:3px;background:rgba(255,255,255,.08);border-radius:3px;position:relative;overflow:hidden}
+.scroll-indicator__thumb{position:absolute;top:0;width:40%;height:100%;background:var(--accent);border-radius:3px;transition:left .15s ease-out;box-shadow:0 0 8px var(--accent-glow)}
 
 /* ─── Album Cards ─── */
 .album-card{flex:0 0 140px;scroll-snap-align:start;transition:transform .25s var(--ease);text-align:left}

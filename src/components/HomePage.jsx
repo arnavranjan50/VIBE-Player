@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { Play, Sparkles, TrendingUp, Star, ChevronRight, Pause, Music, Heart, Mic } from 'lucide-react';
 import { searchSongs, getArtistTopTracks, dedup, getSongSuggestions } from '../utils/api';
 import { getRecommendationQuery, getRecentArtists, getHistory, getFavorites } from '../utils/storage';
@@ -96,32 +96,72 @@ const JumpBackIn = ({ tracks, onPlayTrack, currentTrack }) => (
 // ═══════════════════════════════════════
 // Horizontal scroll cards (for other sections)
 // ═══════════════════════════════════════
-const HScrollCards = ({ tracks, onPlayTrack, currentTrack, badge, maxItems = 8 }) => (
-  <div className="h-scroll">
-    {dedup(tracks).slice(0, maxItems).map((track, i) => {
-      const isActive = currentTrack?.id === track.id;
-      return (
-        <button key={`${track.id}-${i}`} className={`album-card ${isActive ? 'album-card--active' : ''}`} onClick={() => onPlayTrack(track)}>
-          <div className="album-card-img-wrap">
-            {track.cover ? (
-              <img src={track.cover} alt={track.title} className="album-cover" loading="lazy" />
-            ) : (
-              <div className="album-cover album-cover-empty"><Music size={20} color="var(--text-secondary)" /></div>
-            )}
-            <div className="album-card-hover">
-              <div className="album-card-play-btn">
-                {isActive ? <Pause size={16} fill="#fff" /> : <Play size={16} fill="#fff" style={{ marginLeft: 1 }} />}
+const HScrollCards = ({ tracks, onPlayTrack, currentTrack, badge, maxItems = 8 }) => {
+  const scrollRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showIndicator, setShowIndicator] = useState(false);
+
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll > 0) {
+      setScrollProgress(el.scrollLeft / maxScroll);
+      setShowIndicator(true);
+    } else {
+      setShowIndicator(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    // Check on mount if scrollable
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    setShowIndicator(maxScroll > 20);
+  }, [tracks]);
+
+  const items = dedup(tracks).slice(0, maxItems);
+
+  return (
+    <div className="h-scroll-wrap">
+      <div className="h-scroll" ref={scrollRef} onScroll={handleScroll}>
+        {items.map((track, i) => {
+          const isActive = currentTrack?.id === track.id;
+          return (
+            <button key={`${track.id}-${i}`} className={`album-card ${isActive ? 'album-card--active' : ''}`} onClick={() => onPlayTrack(track)}>
+              <div className="album-card-img-wrap">
+                {track.cover ? (
+                  <img src={track.cover} alt={track.title} className="album-cover" loading="lazy" />
+                ) : (
+                  <div className="album-cover album-cover-empty"><Music size={20} color="var(--text-secondary)" /></div>
+                )}
+                <div className="album-card-hover">
+                  <div className="album-card-play-btn">
+                    {isActive ? <Pause size={16} fill="#fff" /> : <Play size={16} fill="#fff" style={{ marginLeft: 1 }} />}
+                  </div>
+                </div>
+                {badge === 'rank' && <span className="album-rank-badge">#{i + 1}</span>}
               </div>
-            </div>
-            {badge === 'rank' && <span className="album-rank-badge">#{i + 1}</span>}
+              <div className="album-title">{track.title}</div>
+              <div className="album-artist">{track.artist}</div>
+            </button>
+          );
+        })}
+      </div>
+      {showIndicator && (
+        <div className="scroll-indicator">
+          <div className="scroll-indicator__track">
+            <div
+              className="scroll-indicator__thumb"
+              style={{ left: `${scrollProgress * 100}%` }}
+            />
           </div>
-          <div className="album-title">{track.title}</div>
-          <div className="album-artist">{track.artist}</div>
-        </button>
-      );
-    })}
-  </div>
-);
+        </div>
+      )}
+    </div>
+  );
+};
 
 // Section Header
 const SectionHead = ({ icon: Icon, iconColor, title, onSeeAll }) => (
